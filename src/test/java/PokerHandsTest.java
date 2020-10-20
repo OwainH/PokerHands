@@ -111,6 +111,38 @@ public class PokerHandsTest {
         assertTrue(pokerHands.hasStraight(hand));
     }
 
+    @Test
+    void shouldNotFindStraight(){
+        int[] numbers = {2, 3, 4, 6, 7};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(!pokerHands.hasStraight(hand));
+    }
+
+    @Test
+    void shouldFindStraightFlush(){
+        int[] numbers = {2, 4, 3, 6, 5};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(pokerHands.hasStraightFlush(hand));
+    }
+
+    @Test
+    void shouldNotFindStraightFlush(){
+        int[] numbers = {2, 4, 3, 6, 5};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(!pokerHands.hasStraightFlush(hand));
+    }
+
+    @Test
+    void shouldFindRoyalFlush(){
+        int[] numbers = {10, 12, 11, 13, 14};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(pokerHands.hasRoyalFlush(hand));
+    }
+
 
     private Hand createHand(int numbers[], Card.Suit suits[]){
         List<Card> cards = new ArrayList<Card>();
