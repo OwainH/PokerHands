@@ -47,4 +47,10 @@ public class PokerHands {
         return false;
     }
 
+    public boolean hasStraight(Hand hand){
+        hand.sort();
+
+        return false;
+    }
+
 }

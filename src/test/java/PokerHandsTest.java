@@ -1,7 +1,5 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -104,6 +102,15 @@ public class PokerHandsTest {
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasFlush(hand));
     }
+
+    @Test
+    void shouldFindStraight(){
+        int[] numbers = {2, 3, 4, 6, 5};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(pokerHands.hasStraight(hand));
+    }
+
 
     private Hand createHand(int numbers[], Card.Suit suits[]){
         List<Card> cards = new ArrayList<Card>();
