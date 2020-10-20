@@ -57,8 +57,6 @@ public class PokerHands {
         return true;
     }
 
-
-
     public boolean hasStraightFlush(Hand hand){
         return hasFlush(hand) && hasStraight(hand);
     }
