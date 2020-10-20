@@ -13,10 +13,10 @@ public class HandTest {
         Hand hand = createHand(numbers, suit);
         hand.sort();
         assertTrue(hand.getCardByIndex(0).getNumber() == 2);
-        assertTrue(hand.getCardByIndex(0).getNumber() == 3);
-        assertTrue(hand.getCardByIndex(0).getNumber() == 4);
-        assertTrue(hand.getCardByIndex(0).getNumber() == 5);
-        assertTrue(hand.getCardByIndex(0).getNumber() == 6);
+        assertTrue(hand.getCardByIndex(1).getNumber() == 3);
+        assertTrue(hand.getCardByIndex(2).getNumber() == 4);
+        assertTrue(hand.getCardByIndex(3).getNumber() == 5);
+        assertTrue(hand.getCardByIndex(4).getNumber() == 6);
     }
 
 
