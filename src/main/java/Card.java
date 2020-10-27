@@ -1,3 +1,5 @@
+import java.time.Duration;
+
 public class Card {
 
     private int number;

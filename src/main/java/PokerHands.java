@@ -5,12 +5,12 @@ public class PokerHands {
 
     public Card selectHighestCard(Hand hand){
         Card highestCard = hand.getCardByIndex(0);
-        for(int i = 1; i < HANDSIZE; i++){
+        for(int i = 0; i < HANDSIZE; i++){
             if(hand.getCardByIndex(i).getNumber() > highestCard.getNumber()){
                 highestCard = hand.getCardByIndex(i);
             }
         }
-        return new Card(5, Card.Suit.Clubs);
+        return highestCard;
     }
 
     public boolean hasMatchingCards(Hand hand, int requiredMatches){
@@ -50,7 +50,15 @@ public class PokerHands {
     public boolean hasStraight(Hand hand){
         hand.sort();
         for(int i = 0; i < HANDSIZE - 1; i++){
-            if(!(hand.getCardByIndex(i).getNumber() + 1 == hand.getCardByIndex(i + 1).getNumber())){
+            if(hand.getCardByIndex(HANDSIZE -1).getNumber() == 14 && i == HANDSIZE - 2){
+                if(hand.getCardByIndex(0).getNumber() == 2){
+                    return true;
+                }
+            }
+            else if(hand.getCardByIndex(HANDSIZE - 1).getNumber() == 14 && i == HANDSIZE - 2){
+
+            }
+            else if(!(hand.getCardByIndex(i).getNumber() + 1 == hand.getCardByIndex(i + 1).getNumber())){
                 return false;
             }
         }
@@ -62,7 +70,7 @@ public class PokerHands {
     }
 
     public boolean hasRoyalFlush(Hand hand){
-        return hasFlush(hand) && hasStraight(hand) && (selectHighestCard(hand).getNumber() == 14);
+        return (hasFlush(hand) && hasStraight(hand)) && (selectHighestCard(hand).getNumber() == 14);
     }
 
 }

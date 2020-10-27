@@ -18,7 +18,7 @@ public class PokerHandsTest {
     void shouldReturnHighestCard(){
         int[] numbers = {6,2,3,4,5};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
-        Card expectedCard = new Card(5, Card.Suit.Clubs);
+        Card expectedCard = new Card(6, Card.Suit.Clubs);
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.selectHighestCard(hand).isMatch(expectedCard));
     }
@@ -73,7 +73,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindFullHouse(){
-        int[] numbers = {2, 2, 4, 4, 4};
+        int[] numbers = {2, 2, 4, 4, 5};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasFullHouse(hand));
@@ -112,8 +112,24 @@ public class PokerHandsTest {
     }
 
     @Test
+    void shouldFindAceLowStraight(){
+        int[] numbers = {14, 3, 4, 2, 5};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(pokerHands.hasStraight(hand));
+    }
+
+    @Test
     void shouldNotFindStraight(){
         int[] numbers = {2, 3, 4, 6, 7};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(!pokerHands.hasStraight(hand));
+    }
+
+    @Test
+    void shouldNotFindStraightWhenOnlyFourInARow(){
+        int[] numbers = {2, 3, 4, 5, 7};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasStraight(hand));
@@ -137,10 +153,18 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindRoyalFlush(){
-        int[] numbers = {10, 12, 11, 13, 14};
+        int[] numbers = {10, 11, 12, 13, 14};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasRoyalFlush(hand));
+    }
+
+    @Test
+    void shouldNotFindRoyalFlush(){
+        int[] numbers = {10, 11, 12, 13, 9};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(!pokerHands.hasRoyalFlush(hand));
     }
 
 
