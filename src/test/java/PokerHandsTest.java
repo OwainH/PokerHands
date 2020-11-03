@@ -73,7 +73,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindFullHouse(){
-        int[] numbers = {2, 2, 4, 4, 5};
+        int[] numbers = {2, 2, 4, 4, 4};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasFullHouse(hand));
@@ -114,6 +114,14 @@ public class PokerHandsTest {
     @Test
     void shouldFindAceLowStraight(){
         int[] numbers = {14, 3, 4, 2, 5};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(pokerHands.hasStraight(hand));
+    }
+
+    @Test
+    void shouldFindAceHighStraight(){
+        int[] numbers = {14, 10, 12, 11, 13};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasStraight(hand));
