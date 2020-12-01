@@ -15,6 +15,12 @@ public class Hand {
         return cards.get(index);
     }
 
+
+
+    public List<Card> getCards(){
+        return cards;
+    }
+
     public void sort(){
         List<Card> newHand = new ArrayList<>();
         for(int i = 0; i < HANDSIZE; i++){
@@ -33,4 +39,6 @@ public class Hand {
         cards.remove(lowestCard);
         return lowestCard;
     }
+
+
 }

@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class PokerHandsTest {
         int[] numbers = {6, 2, 4, 4, 5};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
-        assertTrue(pokerHands.hasMatchingCards(hand, 2));
+        assertTrue(pokerHands.hasMatchingCards(hand).contains(2));
     }
 
     @Test
@@ -36,7 +35,23 @@ public class PokerHandsTest {
         int[] numbers = {6, 2, 3, 4, 5};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
-        assertTrue(!pokerHands.hasMatchingCards(hand, 2));
+        assertTrue(!pokerHands.hasMatchingCards(hand).contains(2));
+    }
+
+    @Test
+    void shouldFindTwoPair(){
+        int[] numbers = {6, 2, 4, 4, 2};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(pokerHands.hasMatchingCombination(hand, 2, 2));
+    }
+
+    @Test
+    void shouldNotFindTwoPair(){
+        int[] numbers = {6, 8, 4, 4, 2};
+        Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
+        Hand hand = createHand(numbers, suit);
+        assertTrue(!pokerHands.hasMatchingCombination(hand, 2, 2));
     }
 
     @Test
@@ -44,7 +59,7 @@ public class PokerHandsTest {
         int[] numbers = {6, 2, 4, 4, 4};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
-        assertTrue(pokerHands.hasMatchingCards(hand, 3));
+        assertTrue(pokerHands.hasMatchingCards(hand).contains(3));
     }
 
     @Test
@@ -52,7 +67,7 @@ public class PokerHandsTest {
         int[] numbers = {6, 2, 4, 4, 5};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
-        assertTrue(!pokerHands.hasMatchingCards(hand, 3));
+        assertTrue(!pokerHands.hasMatchingCards(hand).contains(3));
     }
 
     @Test
@@ -60,7 +75,7 @@ public class PokerHandsTest {
         int[] numbers = {6, 4, 4, 4, 4};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
-        assertTrue(pokerHands.hasMatchingCards(hand, 4));
+        assertTrue(pokerHands.hasMatchingCards(hand).contains(4));
     }
 
     @Test
@@ -68,7 +83,7 @@ public class PokerHandsTest {
         int[] numbers = {6, 2, 4, 4, 4};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
-        assertTrue(!pokerHands.hasMatchingCards(hand, 4));
+        assertTrue(!pokerHands.hasMatchingCards(hand).contains(4));
     }
 
     @Test
@@ -129,7 +144,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindStraight(){
-        int[] numbers = {2, 3, 4, 6, 7};
+        int[] numbers = {14, 2, 13, 3, 4};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasStraight(hand));
