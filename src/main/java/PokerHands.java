@@ -10,7 +10,7 @@ public class PokerHands {
 
         Card highestCard = hand.getCardByIndex(0);
         for (int i = 0; i < HANDSIZE; i++) {
-            if (hand.getCardByIndex(i).getNumber() > highestCard.getNumber()) {
+            if (hand.getCardByIndex(i).getRank().getValue() > highestCard.getRank().getValue()) {
                 highestCard = hand.getCardByIndex(i);
             }
         }
@@ -24,9 +24,11 @@ public class PokerHands {
 
         List<Integer> matches = Arrays.asList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
+
+
         for (int i = 0; i < HANDSIZE; i++) {
-            int newValue = matches.get(hand.getCardByIndex(i).getNumber() - 2) + 1;
-            matches.set(hand.getCardByIndex(i).getNumber() - 2, newValue);
+            int newValue = matches.get(hand.getCardByIndex(i).getRank().getValue() - 2) + 1;
+            matches.set(hand.getCardByIndex(i).getRank().getValue() - 2, newValue);
         }
 
         return matches;
@@ -58,7 +60,7 @@ public class PokerHands {
         hand.sort();
         for (int i = 0; i < HANDSIZE - 1; i++) {
             if (currentCardIsAceAndFirstCardIsTwo(hand, i)) {
-                if (hand.getCardByIndex(0).getNumber() == 2) {
+                if (hand.getCardByIndex(0).getRank().getValue() == 2) {
                     return true;
                 }
             } else if (!isNextCardOneNumberHigher(hand, i)) {
@@ -69,11 +71,11 @@ public class PokerHands {
     }
 
     private boolean currentCardIsAceAndFirstCardIsTwo(Hand hand, int i) {
-        return hand.getCardByIndex(HANDSIZE - 1).getNumber() == 14 && i == HANDSIZE - 2;
+        return hand.getCardByIndex(HANDSIZE - 1).getRank().getValue() == 14 && i == HANDSIZE - 2;
     }
 
     private boolean isNextCardOneNumberHigher(Hand hand, int i) {
-        return hand.getCardByIndex(i).getNumber() + 1 == hand.getCardByIndex(i + 1).getNumber();
+        return hand.getCardByIndex(i).getRank().getValue() + 1 == hand.getCardByIndex(i + 1).getRank().getValue();
     }
 
     public boolean hasStraightFlush(Hand hand) {
@@ -81,7 +83,7 @@ public class PokerHands {
     }
 
     public boolean hasRoyalFlush(Hand hand) {
-        return (hasFlush(hand) && hasStraight(hand)) && (selectHighestCard(hand).getNumber() == 14);
+        return (hasFlush(hand) && hasStraight(hand)) && (selectHighestCard(hand).getRank().getValue() == 14);
     }
 
 }

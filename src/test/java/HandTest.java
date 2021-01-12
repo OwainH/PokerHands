@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -8,22 +10,22 @@ public class HandTest {
 
     @Test
     public void shouldSortHandAscending(){
-        int[] numbers = {3, 2, 4, 6, 5};
+        Card.Rank[] rank = {Card.Rank.THREE, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.SIX, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
-        Hand hand = createHand(numbers, suit);
+        Hand hand = createHand(rank, suit);
         hand.sort();
-        assertTrue(hand.getCardByIndex(0).getNumber() == 2);
-        assertTrue(hand.getCardByIndex(1).getNumber() == 3);
-        assertTrue(hand.getCardByIndex(2).getNumber() == 4);
-        assertTrue(hand.getCardByIndex(3).getNumber() == 5);
-        assertTrue(hand.getCardByIndex(4).getNumber() == 6);
+        assertEquals(2, hand.getCardByIndex(0).getRank().getValue());
+        assertEquals(3, hand.getCardByIndex(1).getRank().getValue());
+        assertEquals(4, hand.getCardByIndex(2).getRank().getValue());
+        assertEquals(5, hand.getCardByIndex(3).getRank().getValue());
+        assertEquals(6, hand.getCardByIndex(4).getRank().getValue());
     }
 
 
-    private Hand createHand(int numbers[], Card.Suit suits[]){
+    private Hand createHand(Card.Rank[] ranks, Card.Suit[] suits){
         List<Card> cards = new ArrayList<Card>();
-        for(int i = 0; i < numbers.length; i++){
-            cards.add(new Card(numbers[i], suits[i]));
+        for(int i = 0; i < ranks.length; i++){
+            cards.add(new Card(ranks[i], suits[i]));
         }
         return new Hand(cards);
     }

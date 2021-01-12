@@ -15,16 +15,16 @@ public class PokerHandsTest {
 
     @Test
     void shouldReturnHighestCard(){
-        int[] numbers = {6,2,3,4,5};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.THREE , Card.Rank.FOUR, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
-        Card expectedCard = new Card(6, Card.Suit.Clubs);
+        Card expectedCard = new Card(Card.Rank.SIX, Card.Suit.Clubs);
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.selectHighestCard(hand).isMatch(expectedCard));
     }
 
     @Test
     void shouldFindPair(){
-        int[] numbers = {6, 2, 4, 4, 5};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasMatchingCards(hand).contains(2));
@@ -32,7 +32,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindPair(){
-        int[] numbers = {6, 2, 3, 4, 5};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO,Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasMatchingCards(hand).contains(2));
@@ -40,7 +40,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindTwoPair(){
-        int[] numbers = {6, 2, 4, 4, 2};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.TWO};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasMatchingCombination(hand, 2, 2));
@@ -48,7 +48,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindTwoPair(){
-        int[] numbers = {6, 8, 4, 4, 2};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.EIGHT, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.TWO};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasMatchingCombination(hand, 2, 2));
@@ -56,7 +56,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindThreeOfAKind(){
-        int[] numbers = {6, 2, 4, 4, 4};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FOUR};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasMatchingCards(hand).contains(3));
@@ -64,7 +64,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindThreeOfAKind(){
-        int[] numbers = {6, 2, 4, 4, 5};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasMatchingCards(hand).contains(3));
@@ -72,7 +72,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindFourOfAKind(){
-        int[] numbers = {6, 4, 4, 4, 4};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FOUR};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasMatchingCards(hand).contains(4));
@@ -80,15 +80,15 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindFourOfAKind(){
-        int[] numbers = {6, 2, 4, 4, 4};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FOUR};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
-        assertTrue(!pokerHands.hasMatchingCards(hand).contains(4));
+        assertTrue(!pokerHands.hasMatchingCards(hand).contains(Card.Rank.FOUR));
     }
 
     @Test
     void shouldFindFullHouse(){
-        int[] numbers = {2, 2, 4, 4, 4};
+        Card.Rank[] numbers = {Card.Rank.TWO, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FOUR};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasFullHouse(hand));
@@ -96,7 +96,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindFullHouse(){
-        int[] numbers = {2, 3, 4, 4, 4};
+        Card.Rank[] numbers = {Card.Rank.TWO,Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.FOUR, Card.Rank.FOUR};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts, Card.Suit.Spades};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasFullHouse(hand));
@@ -104,7 +104,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindFlush(){
-        int[] numbers = {6, 2, 4, 5, 7};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FIVE, Card.Rank.SEVEN};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasFlush(hand));
@@ -112,7 +112,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindFlush(){
-        int[] numbers = {6, 2, 4, 5, 7};
+        Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FIVE, Card.Rank.SEVEN};
         Card.Suit[] suit = {Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasFlush(hand));
@@ -120,7 +120,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindStraight(){
-        int[] numbers = {2, 3, 4, 6, 5};
+        Card.Rank[] numbers = {Card.Rank.TWO,Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.SIX, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasStraight(hand));
@@ -128,7 +128,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindAceLowStraight(){
-        int[] numbers = {14, 3, 4, 2, 5};
+        Card.Rank[] numbers = {Card.Rank.ACE, Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.TWO, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasStraight(hand));
@@ -136,7 +136,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindAceHighStraight(){
-        int[] numbers = {14, 10, 12, 11, 13};
+        Card.Rank[] numbers = {Card.Rank.ACE, Card.Rank.TEN, Card.Rank.QUEEN, Card.Rank.JACK, Card.Rank.KING};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasStraight(hand));
@@ -144,7 +144,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindStraight(){
-        int[] numbers = {14, 2, 13, 3, 4};
+        Card.Rank[] numbers = {Card.Rank.ACE, Card.Rank.TWO, Card.Rank.KING,Card.Rank.THREE, Card.Rank.FOUR};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasStraight(hand));
@@ -152,7 +152,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindStraightWhenOnlyFourInARow(){
-        int[] numbers = {2, 3, 4, 5, 7};
+        Card.Rank[] numbers = {Card.Rank.TWO,Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.FIVE, Card.Rank.SEVEN};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasStraight(hand));
@@ -160,7 +160,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindStraightFlush(){
-        int[] numbers = {2, 4, 3, 6, 5};
+        Card.Rank[] numbers = {Card.Rank.TWO, Card.Rank.FOUR,Card.Rank.THREE, Card.Rank.SIX, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasStraightFlush(hand));
@@ -168,7 +168,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindStraightFlush(){
-        int[] numbers = {2, 4, 3, 6, 5};
+        Card.Rank[] numbers = {Card.Rank.TWO, Card.Rank.FOUR,Card.Rank.THREE, Card.Rank.SIX, Card.Rank.FIVE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasStraightFlush(hand));
@@ -176,7 +176,7 @@ public class PokerHandsTest {
 
     @Test
     void shouldFindRoyalFlush(){
-        int[] numbers = {10, 11, 12, 13, 14};
+        Card.Rank[] numbers = {Card.Rank.TEN, Card.Rank.JACK, Card.Rank.QUEEN, Card.Rank.KING, Card.Rank.ACE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(pokerHands.hasRoyalFlush(hand));
@@ -184,14 +184,14 @@ public class PokerHandsTest {
 
     @Test
     void shouldNotFindRoyalFlush(){
-        int[] numbers = {10, 11, 12, 13, 9};
+        Card.Rank[] numbers = {Card.Rank.TEN, Card.Rank.JACK, Card.Rank.QUEEN, Card.Rank.KING, Card.Rank.NINE};
         Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs};
         Hand hand = createHand(numbers, suit);
         assertTrue(!pokerHands.hasRoyalFlush(hand));
     }
 
 
-    private Hand createHand(int numbers[], Card.Suit suits[]){
+    private Hand createHand(Card.Rank[] numbers, Card.Suit[] suits){
         List<Card> cards = new ArrayList<Card>();
         for(int i = 0; i < numbers.length; i++){
             cards.add(new Card(numbers[i], suits[i]));

@@ -32,7 +32,7 @@ public class Hand {
     private Card getAndRemoveLowestCard(){
         Card lowestCard = cards.get(0);
         for(int i = 0; i < cards.size(); i++){
-            if(cards.get(i).getNumber() < lowestCard.getNumber()){
+            if(cards.get(i).getRank().getValue() < lowestCard.getRank().getValue()){
                 lowestCard = cards.get(i);
             }
         }
