@@ -1,6 +1,4 @@
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
+package model;
 
 public class Card {
 
@@ -12,7 +10,7 @@ public class Card {
         Clubs,
         Hearts
     }
-    public enum Rank{
+    public enum Rank {
         TWO(2),
         THREE(3),
         FOUR(4),
@@ -27,27 +25,15 @@ public class Card {
         KING(13),
         ACE(14);
 
-        private int value;
-        private static Map<Rank, Integer> map = new HashMap<>();
+        private final Integer value;
 
-        Rank(int value){
+        Rank(Integer value) {
             this.value = value;
-        }
-
-        static {
-            for(Rank rank : Rank.values()) {
-                map.put(rank, rank.value);
-            }
-        }
-
-        public static int valueOf(Rank rank){
-            return map.get(rank);
         }
 
         public int getValue(){
             return value;
         }
-
     }
 
     public Card(Rank rank, Suit suit){
@@ -57,6 +43,10 @@ public class Card {
 
     public Rank getRank(){
         return rank;
+    }
+
+    public Integer getRankValue() {
+        return getRank().getValue();
     }
 
     public Suit getSuit(){

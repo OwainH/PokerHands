@@ -1,4 +1,10 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import model.Card;
+import model.Hand;
 
 public class PokerHands {
 
@@ -10,7 +16,7 @@ public class PokerHands {
 
         Card highestCard = hand.getCardByIndex(0);
         for (int i = 0; i < HANDSIZE; i++) {
-            if (hand.getCardByIndex(i).getRank().getValue() > highestCard.getRank().getValue()) {
+            if (hand.getCardByIndex(i).getRankValue() > highestCard.getRank().getValue()) {
                 highestCard = hand.getCardByIndex(i);
             }
         }
