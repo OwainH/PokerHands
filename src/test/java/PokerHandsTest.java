@@ -1,10 +1,17 @@
+import static model.Card.Rank.FOUR;
 import static model.Card.Rank.JACK;
 import static model.Card.Rank.KING;
 import static model.Card.Rank.NINE;
 import static model.Card.Rank.QUEEN;
+import static model.Card.Rank.SIX;
 import static model.Card.Rank.TEN;
+import static model.Card.Rank.TWO;
 import static model.Card.Suit.Clubs;
+import static model.Card.Suit.Diamonds;
+import static model.Card.Suit.Hearts;
+import static model.Card.Suit.Spades;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,15 +64,15 @@ public class PokerHandsTest {
 //    assertFalse(pokerHands.hasMatchingCards(hand).contains(2));
 //  }
 //
-//  @Test
-//  void shouldFindTwoPair() {
-//    Card.Rank[] numbers = {Card.Rank.SIX, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR,
-//        Card.Rank.TWO};
-//    Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts,
-//        Card.Suit.Clubs};
-//    Hand hand = createHand(numbers, suit);
-//    assertTrue(pokerHands.hasMatchingCombination(hand, 2, 2));
-//  }
+  @Test
+  void shouldFindTwoPair() {
+    List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FOUR,
+        TWO);
+    List<Suit> suits = Arrays.asList(Clubs, Clubs, Clubs, Clubs,
+        Hearts);
+    Hand hand = createHand(ranks, suits);
+    assertTrue(pokerHands.hasMatchingCombination(hand, 2, 2));
+  }
 //
 //  @Test
 //  void shouldNotFindTwoPair() {
@@ -117,15 +124,16 @@ public class PokerHandsTest {
 //    assertFalse(pokerHands.hasMatchingCards(hand).contains(Rank.FOUR));
 //  }
 //
-//  @Test
-//  void shouldFindFullHouse() {
-//    Card.Rank[] numbers = {Card.Rank.TWO, Card.Rank.TWO, Card.Rank.FOUR, Card.Rank.FOUR,
-//        Card.Rank.FOUR};
-//    Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts,
-//        Card.Suit.Spades};
-//    Hand hand = createHand(numbers, suit);
-//    assertTrue(pokerHands.hasFullHouse(hand));
-//  }
+  @Test
+  void shouldFindFullHouse() {
+    List<Rank> ranks = Arrays.asList(TWO, TWO, FOUR, FOUR,
+        FOUR);
+    List<Suit> suits = Arrays.asList(Clubs, Diamonds, Clubs, Hearts,
+        Spades);
+
+    Hand hand = createHand(ranks, suits);
+    assertTrue(pokerHands.hasFullHouse(hand));
+  }
 //
 //  @Test
 //  void shouldNotFindFullHouse() {

@@ -6,8 +6,7 @@ import java.util.List;
 public class Hand {
 
     private List<Card> cards;
-    private int rank;
-    private final int HANDSIZE = 5;
+    private final int HAND_SIZE = 5;
 
     public Hand(List<Card> cards){
         this.cards = cards;
@@ -17,15 +16,13 @@ public class Hand {
         return cards.get(index);
     }
 
-
-
     public List<Card> getCards(){
         return cards;
     }
 
     public void sort(){
         List<Card> newHand = new ArrayList<>();
-        for(int i = 0; i < HANDSIZE; i++){
+        for(int i = 0; i < HAND_SIZE; i++){
             newHand.add(getAndRemoveLowestCard());
         }
         cards = newHand;
