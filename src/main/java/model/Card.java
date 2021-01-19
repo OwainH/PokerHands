@@ -2,14 +2,16 @@ package model;
 
 public class Card {
 
-    private Rank rank;
-    private Suit suit;
-    public enum Suit{
+    private final Rank rank;
+    private final Suit suit;
+
+    public enum Suit {
         Spades,
         Diamonds,
         Clubs,
         Hearts
     }
+
     public enum Rank {
         TWO(2),
         THREE(3),
@@ -31,17 +33,17 @@ public class Card {
             this.value = value;
         }
 
-        public int getValue(){
+        public int getValue() {
             return value;
         }
     }
 
-    public Card(Rank rank, Suit suit){
+    public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
     }
 
-    public Rank getRank(){
+    public Rank getRank() {
         return rank;
     }
 

@@ -1,3 +1,5 @@
+import static model.Card.Rank.ACE;
+import static model.Card.Rank.FIVE;
 import static model.Card.Rank.FOUR;
 import static model.Card.Rank.JACK;
 import static model.Card.Rank.KING;
@@ -5,6 +7,7 @@ import static model.Card.Rank.NINE;
 import static model.Card.Rank.QUEEN;
 import static model.Card.Rank.SIX;
 import static model.Card.Rank.TEN;
+import static model.Card.Rank.THREE;
 import static model.Card.Rank.TWO;
 import static model.Card.Suit.Clubs;
 import static model.Card.Suit.Diamonds;
@@ -165,15 +168,13 @@ public class PokerHandsTest {
 //    assertFalse(pokerHands.hasFlush(hand));
 //  }
 //
-//  @Test
-//  void shouldFindStraight() {
-//    Card.Rank[] numbers = {Card.Rank.TWO, Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.SIX,
-//        Card.Rank.FIVE};
-//    Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades,
-//        Card.Suit.Clubs};
-//    Hand hand = createHand(numbers, suit);
-//    assertTrue(pokerHands.hasStraight(hand));
-//  }
+  @Test
+  void shouldFindStraight() {
+    List<Rank> ranks = Arrays.asList(TWO, THREE, FOUR, SIX, FIVE);
+    List<Suit> suits = Arrays.asList(Clubs, Diamonds, Clubs, Spades, Clubs);
+    Hand hand = createHand(ranks, suits);
+    assertTrue(pokerHands.hasStraight(hand));
+  }
 //
 //  @Test
 //  void shouldFindAceLowStraight() {
@@ -195,15 +196,13 @@ public class PokerHandsTest {
 //    assertTrue(pokerHands.hasStraight(hand));
 //  }
 //
-//  @Test
-//  void shouldNotFindStraight() {
-//    Card.Rank[] numbers = {Card.Rank.ACE, Card.Rank.TWO, Card.Rank.KING, Card.Rank.THREE,
-//        Card.Rank.FOUR};
-//    Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades,
-//        Card.Suit.Clubs};
-//    Hand hand = createHand(numbers, suit);
-//    assertFalse(pokerHands.hasStraight(hand));
-//  }
+  @Test
+  void shouldNotFindStraight() {
+    List<Rank> ranks = Arrays.asList(ACE, TWO, KING, THREE, FIVE);
+    List<Suit> suits = Arrays.asList(Clubs, Diamonds, Clubs, Spades, Clubs);
+    Hand hand = createHand(ranks, suits);
+    assertFalse(pokerHands.hasStraight(hand));
+  }
 //
 //  @Test
 //  void shouldNotFindStraightWhenOnlyFourInARow() {

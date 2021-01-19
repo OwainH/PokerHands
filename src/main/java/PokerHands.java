@@ -15,6 +15,7 @@ import static model.Card.Rank.TWO;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import model.Card;
 import model.Card.Rank;
 import model.Card.Suit;
@@ -27,7 +28,7 @@ public class PokerHands {
   public Card selectHighestCard(Hand hand) {
     Card highestCard = hand.getCardByIndex(0);
     for (int i = 0; i < HAND_SIZE; i++) {
-      if (hand.getCardByIndex(i).getRankValue() > highestCard.getRank().getValue()) {
+      if (hand.getCardByIndex(i).getRankValue() > highestCard.getRankValue()) {
         highestCard = hand.getCardByIndex(i);
       }
     }
@@ -42,16 +43,15 @@ public class PokerHands {
     return getCountOfRanksFrom(hand).containsValue(2) && getCountOfRanksFrom(hand).containsValue(3);
   }
 
-
   public boolean hasFlush(Hand hand) {
-    return getCountOfSuits(hand).containsValue(HAND_SIZE);
+    return getCountOfSuitsFrom(hand).containsValue(HAND_SIZE);
   }
 
   public boolean hasStraight(Hand hand) {
     hand.sort();
     for (int i = 0; i < HAND_SIZE - 1; i++) {
       if (currentCardIsAceAndFirstCardIsTwo(hand, i)) {
-        if (hand.getCardByIndex(0).getRank().getValue() == 2) {
+        if (hand.getCardByIndex(0).getRankValue() == 2) {
           return true;
         }
       } else if (!isNextCardOneNumberHigher(hand, i)) {
@@ -61,22 +61,21 @@ public class PokerHands {
     return true;
   }
 
-  private boolean currentCardIsAceAndFirstCardIsTwo(Hand hand, int i) {
-    return hand.getCardByIndex(HAND_SIZE - 1).getRank().getValue() == 14 && i == HAND_SIZE - 2;
-  }
-
-  private boolean isNextCardOneNumberHigher(Hand hand, int i) {
-    return hand.getCardByIndex(i).getRank().getValue() + 1 == hand.getCardByIndex(i + 1).getRank()
-        .getValue();
-  }
-
   public boolean hasStraightFlush(Hand hand) {
     return hasFlush(hand) && hasStraight(hand);
   }
 
   public boolean hasRoyalFlush(Hand hand) {
-    return (hasFlush(hand) && hasStraight(hand)) && (selectHighestCard(hand).getRank().getValue()
+    return (hasFlush(hand) && hasStraight(hand)) && (selectHighestCard(hand).getRankValue()
         == 14);
+  }
+
+  private boolean currentCardIsAceAndFirstCardIsTwo(Hand hand, int i) {
+    return hand.getCardByIndex(HAND_SIZE - 1).getRankValue() == 14 && i == HAND_SIZE - 2;
+  }
+
+  private boolean isNextCardOneNumberHigher(Hand hand, int i) {
+    return hand.getCardByIndex(i).getRankValue() + 1 == hand.getCardByIndex(i + 1).getRankValue();
   }
 
   private Map<Rank, Integer> getCountOfRanksFrom(Hand hand) {
@@ -95,19 +94,24 @@ public class PokerHands {
     rankCount.put(KING, 0);
     rankCount.put(ACE, 0);
     hand.getCards()
-        .forEach(card -> rankCount.compute(card.getRank(), (key, value) -> value + 1));
+        .forEach(card -> rankCount.compute(card.getRank(), (key, value) -> setToZeroIfNull(value) + 1));
     return rankCount;
   }
 
-  private Map<Suit, Integer> getCountOfSuits(Hand hand) {
+  private Map<Suit, Integer> getCountOfSuitsFrom(Hand hand) {
     Map<Suit, Integer> suitCount = new HashMap<>();
     suitCount.put(Suit.Diamonds, 0);
     suitCount.put(Suit.Hearts, 0);
     suitCount.put(Suit.Clubs, 0);
     suitCount.put(Suit.Spades, 0);
     hand.getCards()
-        .forEach(card -> suitCount.compute(card.getSuit(), (key, value) -> value + 1));
+        .forEach(card -> suitCount.compute(card.getSuit(), (key, value) -> setToZeroIfNull(value) + 1));
     return suitCount;
+  }
+
+  private Integer setToZeroIfNull(Integer value) {
+    return Optional.ofNullable(value)
+        .orElse(0);
   }
 
 }
