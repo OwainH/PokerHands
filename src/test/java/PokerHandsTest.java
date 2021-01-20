@@ -176,15 +176,14 @@ public class PokerHandsTest {
     assertTrue(pokerHands.hasStraight(hand));
   }
 //
-//  @Test
-//  void shouldFindAceLowStraight() {
-//    Card.Rank[] numbers = {Card.Rank.ACE, Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.TWO,
-//        Card.Rank.FIVE};
-//    Card.Suit[] suit = {Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades,
-//        Card.Suit.Clubs};
-//    Hand hand = createHand(numbers, suit);
-//    assertTrue(pokerHands.hasStraight(hand));
-//  }
+  @Test
+  void shouldFindAceLowStraight() {
+
+    List<Rank> ranks = Arrays.asList(ACE, THREE, FOUR, TWO, FIVE);
+    List<Suit> suits = Arrays.asList(Clubs, Diamonds, Clubs, Spades, Clubs);
+    Hand hand = createHand(ranks, suits);
+    assertTrue(pokerHands.hasStraight(hand));
+  }
 //
 //  @Test
 //  void shouldFindAceHighStraight() {
