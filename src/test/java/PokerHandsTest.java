@@ -44,7 +44,7 @@ public class PokerHandsTest {
   void shouldReturnHighestCard() {
     List<Rank> ranks = Arrays.asList(SIX, TWO, THREE, FOUR, FIVE);
     List<Suit> suits = Arrays.asList(Clubs, Clubs, Clubs, Clubs, Clubs);
-    Card expectedCard = new Card(SIX, Card.Suit.Clubs);
+    Card expectedCard = new Card(SIX, Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.selectHighestCard(hand).isMatch(expectedCard));
   }
@@ -53,8 +53,8 @@ public class PokerHandsTest {
   void shouldFindPair() {
     List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FOUR, FIVE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Clubs);
+        .asList(Clubs, Clubs, Clubs, Hearts,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasMatchingCombination(hand, 2, 1));
   }
@@ -64,8 +64,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, TWO, THREE, FOUR,
         FIVE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Clubs);
+        .asList(Clubs, Clubs, Clubs, Hearts,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasMatchingCombination(hand, 2, 1));
   }
@@ -85,8 +85,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, EIGHT, FOUR, FOUR,
         TWO);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Clubs);
+        .asList(Clubs, Clubs, Clubs, Hearts,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasMatchingCombination(hand, 2, 2));
   }
@@ -96,8 +96,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FOUR,
         FOUR);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Spades);
+        .asList(Clubs, Clubs, Clubs, Hearts,
+            Spades);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasMatchingCombination(hand, 3, 1));
   }
@@ -107,8 +107,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FOUR,
         FIVE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Spades);
+        .asList(Clubs, Clubs, Clubs, Hearts,
+            Spades);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasMatchingCombination(hand, 3, 1));
   }
@@ -118,8 +118,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, FOUR, FOUR, FOUR,
         FOUR);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Spades);
+        .asList(Clubs, Diamonds, Clubs, Hearts,
+            Spades);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasMatchingCombination(hand, 4, 1));
   }
@@ -129,8 +129,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FOUR,
         FOUR);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Spades);
+        .asList(Clubs, Diamonds, Clubs, Hearts,
+            Spades);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasMatchingCombination(hand, 4, 1));
   }
@@ -151,8 +151,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(TWO, THREE, FOUR, FOUR,
         FOUR);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Hearts,
-            Card.Suit.Spades);
+        .asList(Clubs, Diamonds, Clubs, Hearts,
+            Spades);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasFullHouse(hand));
   }
@@ -162,8 +162,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FIVE,
         SEVEN);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs,
-            Card.Suit.Clubs);
+        .asList(Clubs, Clubs, Clubs, Clubs,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasFlush(hand));
   }
@@ -173,8 +173,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(SIX, TWO, FOUR, FIVE,
         SEVEN);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs,
-            Card.Suit.Clubs);
+        .asList(Diamonds, Clubs, Clubs, Clubs,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasFlush(hand));
   }
@@ -192,8 +192,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(ACE, THREE, FOUR, TWO,
         FIVE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades,
-            Card.Suit.Clubs);
+        .asList(Clubs, Diamonds, Clubs, Spades,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasStraight(hand));
   }
@@ -203,8 +203,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(ACE, TEN, QUEEN, JACK,
         KING);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades,
-            Card.Suit.Clubs);
+        .asList(Clubs, Diamonds, Clubs, Spades,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasStraight(hand));
   }
@@ -222,8 +222,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(TWO, THREE, FOUR, FIVE,
         SEVEN);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Spades,
-            Card.Suit.Clubs);
+        .asList(Clubs, Diamonds, Clubs, Spades,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasStraight(hand));
   }
@@ -233,8 +233,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(TWO, FOUR, THREE, SIX,
         FIVE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs,
-            Card.Suit.Clubs);
+        .asList(Clubs, Clubs, Clubs, Clubs,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasStraightFlush(hand));
   }
@@ -244,8 +244,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(TWO, FOUR, THREE, SIX,
         FIVE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Diamonds, Card.Suit.Clubs, Card.Suit.Clubs,
-            Card.Suit.Clubs);
+        .asList(Clubs, Diamonds, Clubs, Clubs,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertFalse(pokerHands.hasStraightFlush(hand));
   }
@@ -255,8 +255,8 @@ public class PokerHandsTest {
     List<Rank> ranks = Arrays.asList(TEN, JACK, QUEEN, KING,
         ACE);
     List<Suit> suits = Arrays
-        .asList(Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs, Card.Suit.Clubs,
-            Card.Suit.Clubs);
+        .asList(Clubs, Clubs, Clubs, Clubs,
+            Clubs);
     Hand hand = createHand(ranks, suits);
     assertTrue(pokerHands.hasRoyalFlush(hand));
   }
