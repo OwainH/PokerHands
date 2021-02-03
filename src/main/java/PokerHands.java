@@ -10,6 +10,8 @@ import static model.Card.Rank.SIX;
 import static model.Card.Rank.TEN;
 import static model.Card.Rank.THREE;
 import static model.Card.Rank.TWO;
+import static model.Card.Rank.FOUR;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +27,6 @@ import model.Hand;
 
 public class PokerHands {
 
-  public static final int FOUR = 4;
-  public static final int ONE = 1;
   final int HAND_SIZE = 5;
 
   public Card selectHighestCard(Hand hand) {
@@ -39,7 +39,23 @@ public class PokerHands {
     return highestCard;
   }
 
-  public boolean hasMatchingCombination(Hand hand, int matches, int frequency) {
+  public boolean hasPair(Hand hand){
+    return hasMatchingCombination(hand, 2, 1);
+  }
+
+  public boolean hasTwoPair(Hand hand){
+    return hasMatchingCombination(hand, 2, 2);
+  }
+
+  public boolean hasThreeOfAKind(Hand hand){
+    return hasMatchingCombination(hand, 3, 1);
+  }
+
+  public boolean hasFourOfAKind(Hand hand){
+    return hasMatchingCombination(hand, 4, 1);
+  }
+
+  private boolean hasMatchingCombination(Hand hand, int matches, int frequency) {
     return frequency == Collections.frequency(getCountOfRanksFrom(hand).values(), matches);
   }
 
@@ -59,7 +75,7 @@ public class PokerHands {
 
   private List<Rank> findSingleOccurrencesOfRankIn(Hand hand) {
     return getCountOfRanksFrom(hand).entrySet().stream()
-        .filter(entrySet -> entrySet.getValue().equals(ONE))
+        .filter(entrySet -> entrySet.getValue().equals(1))
         .map(Map.Entry::getKey)
         .collect(Collectors.toList());
   }
@@ -69,11 +85,11 @@ public class PokerHands {
   }
 
   private boolean differenceBetweenHighestAndLowestCardRankIsFourIn(List<Rank> ranks) {
-    return getRankFromEndOf(ranks).getValue() - getRankFromStartOf(ranks).getValue() == FOUR;
+    return getRankFromEndOf(ranks).getValue() - getRankFromStartOf(ranks).getValue() == 4;
   }
 
   private boolean hasFiveHighStraightIn(List<Rank> ranks) {
-    return ranks.equals(Arrays.asList(TWO, THREE, Rank.FOUR, FIVE, ACE));
+    return ranks.equals(Arrays.asList(TWO, THREE, FOUR, FIVE, ACE));
   }
 
   private Rank getRankFromEndOf(List<Rank> ranks) {

@@ -56,7 +56,7 @@ public class PokerHandsTest {
         .asList(Clubs, Clubs, Clubs, Hearts,
             Clubs);
     Hand hand = createHand(ranks, suits);
-    assertTrue(pokerHands.hasMatchingCombination(hand, 2, 1));
+    assertTrue(pokerHands.hasPair(hand));
   }
 
   @Test
@@ -67,7 +67,7 @@ public class PokerHandsTest {
         .asList(Clubs, Clubs, Clubs, Hearts,
             Clubs);
     Hand hand = createHand(ranks, suits);
-    assertFalse(pokerHands.hasMatchingCombination(hand, 2, 1));
+    assertFalse(pokerHands.hasPair(hand));
   }
 
   @Test
@@ -77,7 +77,7 @@ public class PokerHandsTest {
     List<Suit> suits = Arrays.asList(Clubs, Clubs, Clubs, Clubs,
         Hearts);
     Hand hand = createHand(ranks, suits);
-    assertTrue(pokerHands.hasMatchingCombination(hand, 2, 2));
+    assertTrue(pokerHands.hasTwoPair(hand));
   }
 
   @Test
@@ -88,7 +88,7 @@ public class PokerHandsTest {
         .asList(Clubs, Clubs, Clubs, Hearts,
             Clubs);
     Hand hand = createHand(ranks, suits);
-    assertFalse(pokerHands.hasMatchingCombination(hand, 2, 2));
+    assertFalse(pokerHands.hasTwoPair(hand));
   }
 
   @Test
@@ -99,7 +99,7 @@ public class PokerHandsTest {
         .asList(Clubs, Clubs, Clubs, Hearts,
             Spades);
     Hand hand = createHand(ranks, suits);
-    assertTrue(pokerHands.hasMatchingCombination(hand, 3, 1));
+    assertTrue(pokerHands.hasThreeOfAKind(hand));
   }
 
   @Test
@@ -110,7 +110,7 @@ public class PokerHandsTest {
         .asList(Clubs, Clubs, Clubs, Hearts,
             Spades);
     Hand hand = createHand(ranks, suits);
-    assertFalse(pokerHands.hasMatchingCombination(hand, 3, 1));
+    assertFalse(pokerHands.hasThreeOfAKind(hand));
   }
 
   @Test
@@ -121,7 +121,7 @@ public class PokerHandsTest {
         .asList(Clubs, Diamonds, Clubs, Hearts,
             Spades);
     Hand hand = createHand(ranks, suits);
-    assertTrue(pokerHands.hasMatchingCombination(hand, 4, 1));
+    assertTrue(pokerHands.hasFourOfAKind(hand));
   }
 
   @Test
@@ -132,7 +132,7 @@ public class PokerHandsTest {
         .asList(Clubs, Diamonds, Clubs, Hearts,
             Spades);
     Hand hand = createHand(ranks, suits);
-    assertFalse(pokerHands.hasMatchingCombination(hand, 4, 1));
+    assertFalse(pokerHands.hasFourOfAKind(hand));
   }
 
   @Test
