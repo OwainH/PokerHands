@@ -1,38 +1,41 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import model.Card;
-import model.Card.Rank;
-import model.Card.Suit;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static service.PokerHands.PokerHandList.PAIR;
+import static service.PokerHands.PokerHandList.TWO_PAIR;
+
 import model.Hand;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import service.PokerHands;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GameTest  {
+public class ApplicationTest {
 
   @Mock
   private PokerHands pokerHands;
+
   @InjectMocks
-  private Game game;
+  private Application application;
 
 
   @Before
-  void setUp() {
+  public void setUp() {
     MockitoAnnotations.openMocks(this);
+  }
+
+  @Test
+  public void shouldSayTwoPairBeatsASinglePair() {
+    Hand firstHand = mock(Hand.class);
+    Hand secondHand = mock(Hand.class);
+    when(pokerHands.getPokerHandFrom(any())).thenReturn(TWO_PAIR, PAIR);
+    Assertions.assertEquals(1, application.compare(firstHand, secondHand));
   }
 
 //  @Test

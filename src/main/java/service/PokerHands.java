@@ -1,6 +1,9 @@
+package service;
+
 import static model.Card.Rank.ACE;
 import static model.Card.Rank.EIGHT;
 import static model.Card.Rank.FIVE;
+import static model.Card.Rank.FOUR;
 import static model.Card.Rank.JACK;
 import static model.Card.Rank.KING;
 import static model.Card.Rank.NINE;
@@ -10,8 +13,16 @@ import static model.Card.Rank.SIX;
 import static model.Card.Rank.TEN;
 import static model.Card.Rank.THREE;
 import static model.Card.Rank.TWO;
-import static model.Card.Rank.FOUR;
-
+import static service.PokerHands.PokerHandList.FLUSH;
+import static service.PokerHands.PokerHandList.FOUR_OF_A_KIND;
+import static service.PokerHands.PokerHandList.FULL_HOUSE;
+import static service.PokerHands.PokerHandList.HIGH_CARD;
+import static service.PokerHands.PokerHandList.PAIR;
+import static service.PokerHands.PokerHandList.ROYAL_FLUSH;
+import static service.PokerHands.PokerHandList.STRAIGHT;
+import static service.PokerHands.PokerHandList.STRAIGHT_FLUSH;
+import static service.PokerHands.PokerHandList.THREE_OF_A_KIND;
+import static service.PokerHands.PokerHandList.TWO_PAIR;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,6 +38,29 @@ import model.Hand;
 
 public class PokerHands {
 
+  public enum PokerHandList {
+    HIGH_CARD(1),
+    PAIR(2),
+    TWO_PAIR(3),
+    THREE_OF_A_KIND(4),
+    STRAIGHT(5),
+    FLUSH(6),
+    FULL_HOUSE(7),
+    FOUR_OF_A_KIND(8),
+    STRAIGHT_FLUSH(9),
+    ROYAL_FLUSH(10);
+
+    private final Integer handRanking;
+
+    PokerHandList(Integer handRanking) {
+      this.handRanking = handRanking;
+    }
+
+    public int getHandRanking() {
+      return handRanking;
+    }
+  }
+
   final int HAND_SIZE = 5;
 
   public Card selectHighestCard(Hand hand) {
@@ -39,19 +73,43 @@ public class PokerHands {
     return highestCard;
   }
 
-  public boolean hasPair(Hand hand){
+  public PokerHandList getPokerHandFrom(Hand hand) {
+    if (hasRoyalFlush(hand)) {
+      return ROYAL_FLUSH;
+    } else if (hasStraightFlush(hand)) {
+      return STRAIGHT_FLUSH;
+    } else if (hasFourOfAKind(hand)) {
+      return FOUR_OF_A_KIND;
+    } else if (hasFullHouse(hand)) {
+      return FULL_HOUSE;
+    } else if (hasFlush(hand)) {
+      return FLUSH;
+    } else if (hasStraight(hand)) {
+      return STRAIGHT;
+    } else if (hasThreeOfAKind(hand)) {
+      return THREE_OF_A_KIND;
+    } else if (hasTwoPair(hand)) {
+      return TWO_PAIR;
+    } else if (hasPair(hand)) {
+      return PAIR;
+    } else {
+      return HIGH_CARD;
+    }
+  }
+
+  public boolean hasPair(Hand hand) {
     return hasMatchingCombination(hand, 2, 1);
   }
 
-  public boolean hasTwoPair(Hand hand){
+  public boolean hasTwoPair(Hand hand) {
     return hasMatchingCombination(hand, 2, 2);
   }
 
-  public boolean hasThreeOfAKind(Hand hand){
+  public boolean hasThreeOfAKind(Hand hand) {
     return hasMatchingCombination(hand, 3, 1);
   }
 
-  public boolean hasFourOfAKind(Hand hand){
+  public boolean hasFourOfAKind(Hand hand) {
     return hasMatchingCombination(hand, 4, 1);
   }
 
@@ -93,7 +151,7 @@ public class PokerHands {
   }
 
   private Rank getRankFromEndOf(List<Rank> ranks) {
-    return ranks.get(ranks.size()-1);
+    return ranks.get(ranks.size() - 1);
   }
 
   private Rank getRankFromStartOf(List<Rank> ranks) {
@@ -125,7 +183,8 @@ public class PokerHands {
     rankCount.put(KING, 0);
     rankCount.put(ACE, 0);
     hand.getCards()
-        .forEach(card -> rankCount.compute(card.getRank(), (key, value) -> setToZeroIfNull(value) + 1));
+        .forEach(
+            card -> rankCount.compute(card.getRank(), (key, value) -> setToZeroIfNull(value) + 1));
     return rankCount;
   }
 
@@ -136,7 +195,8 @@ public class PokerHands {
     suitCount.put(Suit.Clubs, 0);
     suitCount.put(Suit.Spades, 0);
     hand.getCards()
-        .forEach(card -> suitCount.compute(card.getSuit(), (key, value) -> setToZeroIfNull(value) + 1));
+        .forEach(
+            card -> suitCount.compute(card.getSuit(), (key, value) -> setToZeroIfNull(value) + 1));
     return suitCount;
   }
 

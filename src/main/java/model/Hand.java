@@ -5,39 +5,39 @@ import java.util.List;
 
 public class Hand {
 
-    private List<Card> cards;
-    private final int HAND_SIZE = 5;
+  private List<Card> cards;
+  private final int HAND_SIZE = 5;
 
-    public Hand(List<Card> cards){
-        this.cards = cards;
-    }
+  public Hand(List<Card> cards) {
+    this.cards = cards;
+  }
 
-    public Card getCardByIndex(int index){
-        return cards.get(index);
-    }
+  public Card getCardByIndex(int index) {
+    return cards.get(index);
+  }
 
-    public List<Card> getCards(){
-        return cards;
-    }
+  public List<Card> getCards() {
+    return cards;
+  }
 
-    public void sort(){
-        List<Card> newHand = new ArrayList<>();
-        for(int i = 0; i < HAND_SIZE; i++){
-            newHand.add(getAndRemoveLowestCard());
-        }
-        cards = newHand;
+  public void sort() {
+    List<Card> newHand = new ArrayList<>();
+    for (int i = 0; i < HAND_SIZE; i++) {
+      newHand.add(getAndRemoveLowestCard());
     }
+    cards = newHand;
+  }
 
-    private Card getAndRemoveLowestCard(){
-        Card lowestCard = cards.get(0);
-        for(int i = 0; i < cards.size(); i++){
-            if(cards.get(i).getRank().getValue() < lowestCard.getRank().getValue()){
-                lowestCard = cards.get(i);
-            }
-        }
-        cards.remove(lowestCard);
-        return lowestCard;
+  private Card getAndRemoveLowestCard() {
+    Card lowestCard = cards.get(0);
+    for (int i = 0; i < cards.size(); i++) {
+      if (cards.get(i).getRank().getValue() < lowestCard.getRank().getValue()) {
+        lowestCard = cards.get(i);
+      }
     }
+    cards.remove(lowestCard);
+    return lowestCard;
+  }
 
 
 }
